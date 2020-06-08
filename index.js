@@ -34,11 +34,14 @@ function handleErr(err) {
 }
 
 let count = 0
+let separator = ''
 
 const stream = fs.createWriteStream("comments.json", { flags: "a" });
+stream.write('[\n');
 
 function writeToFile(data) {
-  stream.write(JSON.stringify(data, null, 2) + ",\n");
+  stream.write(`${separator}${JSON.stringify(data, null, 2)}`);
+  if (!separator) separator = '\n\t,'
 }
 
 async function handleResp(response) {
@@ -51,6 +54,8 @@ async function handleResp(response) {
   if (data.data.after) {
     count++
     await fetchComments(data.data.after);
+  } else {
+    stream.write(']');
   }
 }
 
