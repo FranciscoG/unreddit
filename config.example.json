@@ -1,0 +1,27 @@
+{
+  "username": "",
+  "password": "",
+  "TOTP" : "",
+  "app_id": "",
+  "app_secret": "",
+
+  "verbose": true,
+  "save_directory": "/tmp",
+  "whitelist": [],
+  "whitelist_ids": [],
+  "multi_blacklist": [],
+  "multi_whitelist": [],
+  "item": "overview",
+  "sort": "new",
+  "whitelist_distinguished": true,
+  "whitelist_gilded": true,
+  "max_score": 100,
+  "hours": 24,
+  "nuke_hours": 4320,
+  "keep_a_copy": false,
+  "trial_run": true,
+  "clear_vote": false,
+  "replacement_format": "random",
+  "edit_only": false,
+  "batch_cooldown": 10
+}

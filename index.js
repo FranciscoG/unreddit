@@ -1,30 +1,20 @@
-require("dotenv").config();
 const fs = require("fs");
-const RedditAPI = require("reddit-wrapper-v2");
+const config = require("./config.json");
 
-const {
-  REDDIT_APP_ID,
-  REDDIT_APP_SECRET,
-  REDDIT_USER,
-  REDDIT_PW,
-  REDDIT_TOTP,
-} = process.env;
+const { username, password, TOTP, app_id, api_secret } = config;
 
-let password = REDDIT_PW;
-if (REDDIT_TOTP) {
-  password = `${REDDIT_PW}:${REDDIT_TOTP}`;
-}
+const pwd = TOTP ? `${password}:${TOTP}` : password;
 
 const reddit = new RedditAPI({
-  username: REDDIT_USER,
-  password,
-  app_id: REDDIT_APP_ID,
-  api_secret: REDDIT_APP_SECRET,
+  username,
+  password: pwd,
+  app_id,
+  api_secret,
   user_agent: "my-test-script",
   retry_on_wait: true,
   retry_on_server_error: 5,
   retry_delay: 1,
-  logs: true
+  logs: true,
 });
 
 function handleErr(err) {
@@ -33,15 +23,15 @@ function handleErr(err) {
   console.error("api request failed: " + err);
 }
 
-let count = 0
-let separator = ''
+let count = 0;
+let separator = "";
 
 const stream = fs.createWriteStream("comments.json", { flags: "a" });
-stream.write('[\n');
+stream.write("[\n");
 
 function writeToFile(data) {
   stream.write(`${separator}${JSON.stringify(data, null, 2)}`);
-  if (!separator) separator = '\n\t,'
+  if (!separator) separator = "\n\t,";
 }
 
 async function handleResp(response) {
@@ -52,18 +42,19 @@ async function handleResp(response) {
   writeToFile(data);
 
   if (data.data.after) {
-    count++
+    count++;
     await fetchComments(data.data.after);
   } else {
-    stream.write(']');
+    stream.write("]");
   }
 }
 
 async function fetchComments(after) {
   const data = {
     limit: 100,
-    count
+    count,
   };
+
   if (after) {
     data.after = after;
   }

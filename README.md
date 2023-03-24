@@ -10,4 +10,7 @@ Put your user name into [snoopsnoo](https://snoopsnoo.com/) and see just how muc
 
 I care about privacy but I also want to keep the same account. I personally don't want too much "history" for my account so I'd rather just delete everything older than a year or so old (you can set the threshold). This prevents someone doxing you just in case you have given away some identifying information in a comment and forgot about it. If you had 8 years of comments to sift through it can be a daunting task so I wanted to automate it
 
+## How to use 
 
+- clone the repo locally
+- 
