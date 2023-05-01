@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.181.0/"
+  },
+  "tasks": {
+    "start": "deno run --allow-net=deno.land,oauth.reddit.com,www.reddit.com --allow-read=./config.json --allow-write=./tmp,./config.json main.ts"
+  }
+}

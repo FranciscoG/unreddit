@@ -1,6 +1,11 @@
 .env
 node_modules
 *.json
+!deno.json
 !package.json
 !package-lock.json
 !config.example.json
+.vscode
+
+.DS_Store
+Thumbs.db
