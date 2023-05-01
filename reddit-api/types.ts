@@ -15,7 +15,7 @@ export interface RequiredOptions {
   /**
    * Required - The Reddit Application Secret.
    */
-  api_secret: string;
+  app_secret: string;
 }
 
 export interface OptionalOptions {
@@ -44,7 +44,7 @@ export interface OptionalOptions {
   retry_on_server_error?: number;
 
   /**
-   * Optional - Specifies the retry delay for server error retries. (IE. if server error and you specify you want to retry before retrying it will delay for retry_delay seconds.)
+   * Optional - Specifies the retry delay, in seconds, for server error retries. (IE. if server error and you specify you want to retry before retrying it will delay for retry_delay seconds.)
    * default: 5;
    */
   retry_delay?: number;
@@ -66,3 +66,10 @@ export type RequestMethods =
  * - an object with only level of properties - will be converted into FormData
  */
 export type RequestData = RequestInit["body"];
+
+export interface RedditTokenResponse {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
+}

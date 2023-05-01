@@ -1,17 +1,11 @@
 import { encode } from "std/encoding/base64.ts";
-import { RequestData, RequestMethods } from "./types.d.ts";
-
-type URLSearchParamsParam =
-  | string[][]
-  | Record<string, string>
-  | string
-  | URLSearchParams;
+import { RequestData, RequestMethods } from "./types.ts";
 
 export interface CustomRequestConfig {
   url: string;
   method: RequestMethods;
   headers?: Record<string, string>;
-  qs?: URLSearchParamsParam;
+  qs?: ConstructorParameters<typeof URLSearchParams>[0];
   body?: RequestData;
   json?: boolean;
   auth?: {
@@ -21,7 +15,7 @@ export interface CustomRequestConfig {
 }
 
 export function request(config: CustomRequestConfig) {
-  const qs = new URLSearchParams(config.qs || {});
+  const qs = new URLSearchParams(config.qs);
   const headers = new Headers();
 
   if (config.json) {
